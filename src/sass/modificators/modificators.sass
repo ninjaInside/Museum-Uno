@@ -1,0 +1,39 @@
+$color_b: #000
+$color_w: #fff
+$color_g: #131313
+
+@mixin flex($direct, $just, $align)
+	display: flex
+	flex-direction: $direct
+	justify-content: $just
+	align-items: $align
+
+
+.main-window__arrow-slider_left
+	left: 0
+
+	button
+		margin-left: 2px
+	
+	svg
+		transform: rotate(90deg)
+.main-window__arrow-slider_right 
+	right: 0
+
+	button
+		margin-right: 2px
+	
+	svg
+		transform: rotate(-90deg)
+.main-window_black-color
+	background-color: $color_b
+.main-window_indent-p
+	padding: 50px 80px
+.main-window_header_mobile-panel-h
+	height: 800px !important
+
+
+.wrraper_indent-p
+	padding: 30px
+.wrraper_color-gray
+	background-color: $color_g

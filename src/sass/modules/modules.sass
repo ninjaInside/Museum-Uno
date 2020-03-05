@@ -1,0 +1,265 @@
+$color_b: #000
+$color_w: #fff
+$color_g: #131313
+
+@mixin flex($direct, $just, $align)
+	display: flex
+	flex-direction: $direct
+	justify-content: $just
+	align-items: $align
+
+
+.main-window
+	@include flex(row, center, center)
+	position: relative 
+	width: 100%
+	height: 100vh
+
+	&__arrow-slider
+		@include flex(column, center, center)
+		position: absolute
+		margin: auto 0
+		top: 0
+		bottom: 0
+		height: 100%
+
+		& > button
+			@include flex(column, center, center)
+			width: 38px
+			height: 38px 
+			border: 0
+			background: transparent
+
+			& > svg 
+				width: 18px
+				fill: rgba(255, 255, 255, .6)
+				transition: fill .25s ease-in
+		& > button:hover svg 
+			fill: rgba(255, 255, 255, 0.8)
+	
+	&__header
+		@include flex(column, flex-start, center)
+		position: absolute
+		width: inherit
+		height: 50px
+		top: 0px
+		padding: 0px 90px
+
+		button
+			border: 0
+			background-color: transparent
+			display: none
+			padding: 0
+			margin: 0
+			z-index: 10000
+
+	&__nav-and-logo
+		flex-shrink: 0
+		@include flex(row, space-between, center)
+		color: white
+		height: 100%
+		width: inherit
+
+		& > span 
+			a
+				color: $color_w
+				text-transform: uppercase
+				font-size: 13px
+				letter-spacing: 11px
+			
+			a:hover
+				animation: blink .85s 0s ease-in 
+
+		& > nav 
+			ul 
+				display: flex
+				list-style-type: none
+				padding: 0
+				margin: 0
+
+				a:last-child
+					margin-right: 0
+
+				a
+					margin: 0 20px
+					color: rgba($color_w, .6)
+					text-transform: uppercase
+					font-size: 10px
+					letter-spacing: 2px
+					transition: .25s ease-in
+
+				a:hover
+					color: rgba($color_w, 1)
+
+	&__header_mobile-panel
+		display: none
+		flex-shrink: 0
+		width: 100%
+		height: 0px
+		padding: -10px -10px
+		background-color: $color_b
+		z-index: 1000
+		transition: .25s linear
+		overflow: hidden
+
+		& > nav 
+			display: block !important
+
+			ul 
+				@include flex(column, flex-start, flex-start)
+				list-style-type: none
+				padding-left: 90px !important
+				a
+					font-size: 42px
+					margin-bottom: 80px !important
+					color: rgba($color_w, 0.9)
+					width: inherit
+
+				a:first-child
+					margin-top: 0 !important
+
+
+	&__slider 
+		@include flex(row, center, center)
+		width: 100%
+		height: 100%
+		overflow: hidden
+
+		& > div
+			@include flex(row, center, center)
+			width: 100%
+			height: 100%
+			transform: translate(0px)
+			transition: .5s ease-in-out
+	
+			& > img
+				flex-shrink: 0
+				margin: 0 15px
+				height: 100%
+
+	&__footer
+		@include flex(row, space-between, center)
+		position: absolute
+		width: inherit
+		height: 50px
+		bottom: 0px
+		padding: 0px 90px
+		color: rgba($color_w, .6)
+		text-transform: uppercase
+		font-size: 10px
+		letter-spacing: 2px
+		
+		& > nav 
+			ul 
+				display: flex
+				list-style-type: none
+				padding: 0
+				margin: 0
+
+				a:last-child
+					margin-right: 0
+
+				a
+					margin: 0 10px
+					color: rgba($color_w, .6)
+					text-transform: uppercase
+					font-size: 10px
+					letter-spacing: 2px
+					transition: .25s ease-in
+
+				a:hover
+					color: rgba($color_w, 1)
+
+
+.wrraper
+	@include flex(column, center, center)
+	width: 100%
+	height: 100%
+
+.load__window
+	@include flex(row, center, center) 
+	position: absolute
+	height: 100vh
+	width: 100%
+	background-color: $color_b
+	z-index: 100000
+
+	span 
+		@include flex(row, center, center)
+		color: $color_w
+		text-transform: uppercase
+		letter-spacing: 10px
+		font-size: 12px
+
+		img
+			margin-left: 10px 
+
+
+
+@media screen and (max-width: 1000px)
+	.main-window
+		&__slider
+			div
+				width: 100%
+				height: 100%
+		&__nav-and-logo
+			padding: 0 40px
+
+			& > span
+				a 
+					font-size: 42px 
+
+		&__header
+			padding-left: 0px
+			padding-right: 0px
+			height: 210px
+			background-color: $color_b
+
+			nav 
+				display: none
+
+			button
+				display: block
+
+		&__footer
+			justify-content: center
+			padding-left: 20px
+			padding-right: 20px
+			height: 210px
+
+			span 
+				display: none 
+
+			& > nav 
+				ul 
+					a 
+						font-size: 36px
+						margin: 0 35px
+
+					a:last-child
+						margin-right: 10px
+		&__arrow-slider
+			margin: auto 0
+			height: 120px
+			background-color: $color_g
+			z-index: 100
+			margin-left: 55px
+			margin-right: 55px
+
+			& > button
+				@include flex(column, center, center)
+				width: 120px
+				height: 120px 
+
+				& > svg 
+					width: 56px
+
+		&__header_mobile-panel
+			display: block
+
+	.wrraper
+		height: 85%
+
+	.main-window_indent-p
+		padding-left: 0 
+		padding-right: 0 
