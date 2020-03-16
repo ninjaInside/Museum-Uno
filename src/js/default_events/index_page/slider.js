@@ -59,7 +59,7 @@ class Slider_Functional extends Slider_Init {
 					$(this.slider_w).css('transform', `translateX(${this.slider_w_transformVal}px)`);				
 
 				})();
-			break
+			break;
 
 		}
 
@@ -94,11 +94,11 @@ class Slider_Functional extends Slider_Init {
 
 		if (valueMode == 'n') {
 				
-			return arrayHand.reduce((sum, current) => sum - current, 0);
+			return _.reduce(arrayHand, (sum, current) => sum - current, 0);
 			
 		} else if (valueMode == 'p') {
 
-			return arrayHand.reduce((sum, current) => sum + current, 0)
+			return _.reduce(arrayHand, (sum, current) => sum + current, 0)
 			
 		}
 
@@ -130,17 +130,17 @@ class Slider_Builder extends Slider_Functional {
 
 	buildSlider() {
 
-		const sld = this;
+		const _ = this;
 
 		$(this.slider_btn).click(function(e) {
 
 			if ($(e.target).attr('data-direct') == 'left_d') {
 
-				sld.moveSlider('left');
+				_.moveSlider('left');
 
 			} else if ($(e.target).attr('data-direct') == 'right_d') {
 
-				sld.moveSlider('right');
+				_.moveSlider('right');
 
 			}
 
