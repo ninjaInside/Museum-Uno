@@ -7,7 +7,6 @@ class Slider_Init {
 		this.slider_btn = sliderButtons;
 
 		this.slider_w_transformVal = 0;
-		this.slider_slideCounter = Math.round($(this.slider_w).children('img').length / 2);;
 
 	}
 
@@ -32,7 +31,7 @@ class Slider_Functional extends Slider_Init {
 			case 'left':
 				(() => {
 
-					if (this.checkBorder('p', this.slider_w_transformVal)) {
+					if (this.checkBorder('first')) {
 
 						return;
 
@@ -48,7 +47,7 @@ class Slider_Functional extends Slider_Init {
 			case 'right':
 				(() => {
 
-					if (this.checkBorder('n', this.slider_w_transformVal)) {
+					if (this.checkBorder('last')) {
 
 						return;
 
@@ -104,23 +103,13 @@ class Slider_Functional extends Slider_Init {
 
 	}
 
-	checkBorder(typeMode, transform) {
+	checkBorder(turn) {
 
-		switch (typeMode) {
+		let currentSlide = document.elementFromPoint(window.innerWidth / 2, window.innerHeight / 2);
 
-			case 'p': 
-				if (transform >= this.calcTransform('all', 'p') / this.slider_slideCounter) {
-					return true;
-				}
-			break;
+		if ($(currentSlide).attr('data-turn') == turn) return true;
 
-			case 'n':
-				if (transform <= this.calcTransform('all', 'n') / this.slider_slideCounter) {
-					return true;
-				}
-			break;
-
-		}
+		return false;
 
 	}
 
@@ -130,17 +119,17 @@ class Slider_Builder extends Slider_Functional {
 
 	buildSlider() {
 
-		const _ = this;
+		this.moveSlider = _.debounce(this.moveSlider, 330)
 
-		$(this.slider_btn).click(function(e) {
+		$(this.slider_btn).click((e) => {
 
 			if ($(e.target).attr('data-direct') == 'left_d') {
 
-				_.moveSlider('left');
+				this.moveSlider('left');
 
 			} else if ($(e.target).attr('data-direct') == 'right_d') {
 
-				_.moveSlider('right');
+				this.moveSlider('right');
 
 			}
 
