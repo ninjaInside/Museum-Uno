@@ -37,7 +37,7 @@ class PopUp_Functional extends PopUp_Init {
 							</g>
 						</svg>
 					</button>
-					<img src="${src}" alt="" class="popUp-window__image">
+					<div><img src="${src}" alt="" class="popUp-window__image"></div>
 					<button class="popUp-window__btn" data-direct="right">
 						<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 240.811 240.811" xml:space="preserve" style="fill: #000" width="24px" data-direct="right">
@@ -160,7 +160,7 @@ void function() {
 
 	if (window.innerWidth > 1000) {
 
-		let popup = new PopUp_Build('.main-window__gallary > div > img');
+		let popup = new PopUp_Build('.gallary__img > img');
 
 		popup.build();
 
