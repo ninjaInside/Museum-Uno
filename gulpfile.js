@@ -28,14 +28,9 @@ gulp.task('sass', function() {
 		.pipe(gulp.dest('src/css'))
 });
 
-gulp.task('pug', function() {
-	return gulp.src('src/html_temlates/**/*.pug')
-	.pipe(pug())
-	.pipe(gulp.dest('src/'));
-});
 
 gulp.task('js-validate-minify-def', function() {
-	return gulp.src('src/js/default_events/*.js')
+	return gulp.src('src/js/default_events/**/*.js')
 		.pipe(babel({
 			presets: ['@babel/env']
 		}))
@@ -86,7 +81,12 @@ gulp.task('clean', async function() {
 });
 
 gulp.task('port-css', function() {
-	return gulp.src('src/css/style.min.css')
+	return gulp.src('src/css/*')
+		.pipe(mincss())
+		.pipe(postcss([autoprefixer([
+			'last 10 version'
+			])]))
+		.pipe(concat('styles.min.css'))
 		.pipe(gulp.dest('dist/css'));
 });
 
@@ -96,7 +96,7 @@ gulp.task('port-fonts', function() {
 });
 
 gulp.task('port-html', function() {
-	return gulp.src('src/html/*.html')
+	return gulp.src('src/*.html')
 		.pipe(gulp.dest('dist/html'));
 });
 
